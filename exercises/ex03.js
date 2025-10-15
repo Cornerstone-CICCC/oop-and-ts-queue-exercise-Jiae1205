@@ -8,6 +8,16 @@ const Queue = require('../lib/Queue')
 
 function processReturns(queue) {
   // your code here
+  const size = queue.size()
+
+  for (let i = 0; i < size; i++) {
+    const person = queue.dequeue()
+    const totalFine = person.books.reduce((sum, book) => sum + (book.daysLate * 2), 0)
+
+    if (totalFine > 0) {
+      queue.enqueue(person)
+    }
+  }
 }
 
 const returns = new Queue();
